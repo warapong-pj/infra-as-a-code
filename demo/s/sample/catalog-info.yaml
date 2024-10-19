@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "sample"
+spec:
+  type: service
+  owner: "group:default/bravo-team"
+  lifecycle: experimental
