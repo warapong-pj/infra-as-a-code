@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "demo"-"d"-"sample"
+spec:
+  type: iam
+  owner: "group:default/alpha-team"
+  lifecycle: experimental
