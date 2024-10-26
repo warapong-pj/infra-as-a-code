@@ -37,6 +37,7 @@ provider "aws" {
 }
 
 locals {
+  name = "${var.project}-${var.environment}-${var.name}"
   tags = {
     Name              = "${var.project}-${var.environment}-${var.name}"
     Owner             = var.owner
@@ -49,7 +50,7 @@ module "s3-bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "4.1.2"
 
-  bucket = "${var.project}-${var.environment}-${var.name}"
+  bucket = local.name
   acl    = "private"
 
   control_object_ownership = true
