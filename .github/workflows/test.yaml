@@ -6,5 +6,21 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged --shm-size=2g
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock:ro
     steps:
-      - run: echo "test pipeline"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Mock AWS API
+        run: |
+          docker run -i -t -d -p 5000:5000 --rm --name moto motoserver/moto:5.0.15
+          docker ps
+
+      - name: Cleanup
+        run: |
+          docker rm -f moto
